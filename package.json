@@ -2,7 +2,7 @@
   "name": "ember-cli-pr-9987-repro",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for ember-cli-pr-9987-repro goes here",
+  "description": "A test of https://github.com/ember-cli/ember-cli/pull/9987",
   "repository": "",
   "license": "MIT",
   "author": "",
@@ -65,5 +65,10 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "ember-addon": {
+    "paths": [
+      "lib/crash-in-postbuild"
+    ]
   }
 }

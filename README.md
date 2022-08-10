@@ -1,57 +1,24 @@
 # ember-cli-pr-9987-repro
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This Ember app is a test of https://github.com/ember-cli/ember-cli/pull/9987.
 
-## Prerequisites
+It uses an in-repo addon whose post-build hook succeeds the first time it's called, and then fails the second time, fourth time, sixth time, etc.
 
-You will need the following things properly installed on your computer.
+## Repro
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/)
-* [Yarn](https://yarnpkg.com/)
-* [Ember CLI](https://cli.emberjs.com/release/)
-* [Google Chrome](https://google.com/chrome/)
+To reproduce the issue https://github.com/ember-cli/ember-cli/pull/9987 is aiming to fix:
 
-## Installation
+1. `ember serve` (build succeeds)
+2. Open http://localhost:4200 in a browser (UI loads)
+3. Make a change to `application.hbs` (build fails, process exits, browser does not reload)
 
-* `git clone <repository-url>` this repository
-* `cd ember-cli-pr-9987-repro`
-* `yarn install`
+To see that it fixes it:
 
-## Running / Development
+1. In `package.json`, change the `ember-cli` version to git+ssh://git@github.com/bendemboski/ember-cli.git#handle-build-failures
+2. `yarn`
+3. `ember serve` (build succeeds)
+2. Open http://localhost:4200 in a browser (UI loads)
+3. Make a change to `application.hbs` (build fails, process does _not_ exit, browser does not reload)
+4. Make another change to `application.hbs` (build succeeds, browser reloads)
+5. Repeat steps 3-4 as desired
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Linting
-
-* `yarn lint`
-* `yarn lint:fix`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://cli.emberjs.com/release/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
